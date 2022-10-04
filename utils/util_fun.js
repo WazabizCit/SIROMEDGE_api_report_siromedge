@@ -3,7 +3,6 @@ var log4js = require("log4js");
 let config = require("../config/env");
 
 
-
 log4js.configure({
     appenders: {
         appender: {
@@ -28,12 +27,12 @@ logger.level = "debug";
 
 exports.show_log_res_info = (req, obj) => {
 
-    const node_id = process.env.NODE_ID || '0';
     let originalUrl = req.originalUrl
     let remoteAddress =  req.socket.remoteAddress
     let remotePort = req.socket.remotePort
     let app_name  = config.main_config.APP_NAME
     let sub_app_name  = req.baseUrl
+    let node_id  =  "0"
     let status  =  "RES"
 
 
@@ -101,7 +100,7 @@ exports.show_log_res_warning = (req, obj) => {
     let remotePort = req.socket.remotePort
     let app_name  = config.main_config.APP_NAME
     let sub_app_name  = req.baseUrl
-    const node_id = process.env.NODE_ID || '0';
+    let node_id  =  "0"
     let status  =  "RES"
 
 
@@ -161,6 +160,7 @@ exports.show_log_res_warning = (req, obj) => {
         )
 
     }
+
 }
 
 
@@ -171,7 +171,7 @@ exports.show_log_res_error = (req, obj) => {
     let remotePort = req.socket.remotePort
     let app_name  = config.main_config.APP_NAME
     let sub_app_name  = req.baseUrl
-    const node_id = process.env.NODE_ID || '0';
+    let node_id  =  "0"
     let status  =  "RES"
 
     try {
@@ -230,6 +230,7 @@ exports.show_log_res_error = (req, obj) => {
 
 
     }
+
 }
 
 
@@ -242,7 +243,7 @@ exports.show_log_res_fatal = (req, obj) => {
     let remotePort = req.socket.remotePort
     let app_name  = config.main_config.APP_NAME
     let sub_app_name  = req.baseUrl
-    const node_id = process.env.NODE_ID || '0';
+    let node_id  =  "0"
     let status  =  "RES"
 
     try {
@@ -304,6 +305,7 @@ exports.show_log_res_fatal = (req, obj) => {
         ORIGINALURL => ${originalUrl} 
        `
         )
+
     }
 }
 
@@ -319,7 +321,7 @@ exports.show_log_req = (req) => {
     let remotePort = req.socket.remotePort
     let app_name  = config.main_config.APP_NAME
     let sub_app_name  = req.baseUrl
-    const node_id = process.env.NODE_ID || '0';
+    let node_id  =  "0"
     let status  =  "REQ"
 
     try {    

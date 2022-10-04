@@ -27,7 +27,7 @@ const config_env = {
 
     },
     main_config: {
-        PORT: 9006,
+        PORT: 39004,
         APP_NAME:"api_report_siromedge",
 
     }

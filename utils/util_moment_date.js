@@ -15,3 +15,6 @@ exports.timestamp_now_default = () => {
 }
 
 
+exports.date_now_img = () => {
+  return moment().tz('Etc/GMT-7').format('YYYYMMDD')
+}
