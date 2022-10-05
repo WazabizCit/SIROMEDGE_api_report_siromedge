@@ -21,7 +21,7 @@ app.listen(config.main_config.PORT, () => {
 // // //Report
 const actionreports_visitor = require('./routes/action_reports_visitor_route');
 const actionreports_analyst = require('./routes/action_reports_analyst_route');
-
+const actionreports_member = require('./routes/action_reports_member_route');
 
 
 
@@ -31,8 +31,8 @@ const actionreports_analyst = require('./routes/action_reports_analyst_route');
 
 // // //Report
 app.use('/apipos/actionreports/visitor', actionreports_visitor);
+app.use('/apipos/actionreports/member', actionreports_member);
 app.use('/apipos/actionreports/analyst', actionreports_analyst);
-
 
 
 
@@ -55,7 +55,9 @@ pool.connect().then(client => {
             console.log("connect database  success ")
         })
         .catch(err => {
-            client.release()
+
+            console.log(err)
+            client.release()            
             return console.error('Error executing query', err.stack)
         })
 })

@@ -17,6 +17,8 @@ exports.check_cabinet_code = (req, res, next) => {
 
         } else {
 
+  
+
             if (data.length == 1) {
 
                 req.body["cabinet_obj"] = data[0]
