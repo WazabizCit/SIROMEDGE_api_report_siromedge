@@ -1,0 +1,140 @@
+[2022-10-06T11:09:58.234] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:09:58,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 55943,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_payment_status,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54"}
+[2022-10-06T11:09:58.470] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:09:58,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 55943,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_payment_status,    
+        DATA : {"statusCode":"200","error":null,"data":[{"cabinet_status":"PAYMENT"}],"message":"OK"}
+[2022-10-06T11:10:15.333] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:10:15,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 55947,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_type,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54"}
+[2022-10-06T11:10:15.637] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:10:15,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 55947,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_type,    
+        DATA : {"statusCode":"200","error":null,"data":[],"message":"OK"}
+[2022-10-06T11:10:52.383] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:10:52,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 51842,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_type,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54","m_type_cabinet":"PAYMENT"}
+[2022-10-06T11:10:52.656] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:10:52,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 51842,
+        ORIGINALURL => /apipos/actionutil/get_all_cabinet_type,    
+        DATA : {"statusCode":"200","error":null,"data":[{"cabinet_id":9,"cabinet_code":"CP-KIOSK01","cabinet_name":"Kiosk Payment 1 Tara7"},{"cabinet_id":10,"cabinet_code":"CP-KIOSK02","cabinet_name":"Kiosk Payment 2 The Tara"},{"cabinet_id":11,"cabinet_code":"CP-KIOSK03","cabinet_name":"Kiosk Payment 3 Convention Hall"},{"cabinet_id":12,"cabinet_code":"CP-POS01","cabinet_name":"Cashiers 1 Payment Car Tara 7"},{"cabinet_id":13,"cabinet_code":"CP-POS02","cabinet_name":"Cashiers 2 Payment Motrocycle CWT road"},{"cabinet_id":14,"cabinet_code":"CP-POS03","cabinet_name":"Cashires 3 Center"},{"cabinet_id":15,"cabinet_code":null,"cabinet_name":"Cashier Test1"},{"cabinet_id":16,"cabinet_code":null,"cabinet_name":"Cashier Test2"}],"message":"OK"}
+[2022-10-06T11:11:03.420] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:11:03,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62050,
+        ORIGINALURL => /apipos/actionutil/get_all_company,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54"}
+[2022-10-06T11:11:03.774] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:11:03,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62050,
+        ORIGINALURL => /apipos/actionutil/get_all_company,    
+        DATA : {"statusCode":"200","error":null,"data":[{"company_id":1,"company_name":"CIT Company"},{"company_id":2,"company_name":"CP ALL CO., LTD."},{"company_id":3,"company_name":"บริษัท โกซอฟท์ (ประเทศไทย) จำกัด"},{"company_id":4,"company_name":"บริษัท ทเวนตี้โฟร์ ช้อปปิ้ง จำกัด (24 Shoping)"},{"company_id":5,"company_name":"สถาบันการจัดการปัญญาภิวัฒน์และโรงเรียนสาธิตสถาบันการจัดการปัญญาภิวัฒน์"},{"company_id":6,"company_name":"PANYATARA"},{"company_id":7,"company_name":"ALL TRAINING"},{"company_id":8,"company_name":"OUTSOURCE"},{"company_id":9,"company_name":"Value Creation and Consulting"},{"company_id":10,"company_name":"asdasdasd"},{"company_id":11,"company_name":"Undercover"}],"message":"OK"}
+[2022-10-06T11:12:33.225] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:33,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62073,
+        ORIGINALURL => /apipos/actionutil/get_division,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54","m_company_id":1}
+[2022-10-06T11:12:33.521] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:33,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62073,
+        ORIGINALURL => /apipos/actionutil/get_division,    
+        DATA : {"statusCode":"200","error":null,"data":[{"division_id":1,"division_name":"CIT"},{"division_id":48,"division_name":"asd asdasdf."},{"division_id":49,"division_name":"asdasd. asdadsasd"}],"message":"OK"}
+[2022-10-06T11:12:50.315] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:50,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62077,
+        ORIGINALURL => /apipos/actionutil/get_employee,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54","m_division_id":48}
+[2022-10-06T11:12:50.670] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:50,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62077,
+        ORIGINALURL => /apipos/actionutil/get_employee,    
+        DATA : {"statusCode":"200","error":null,"data":[],"message":"OK"}
+[2022-10-06T11:12:56.777] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:56,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62081,
+        ORIGINALURL => /apipos/actionutil/get_employee,    
+        DATA : {"m_cabinet_in_send_time":"2019-09-03 11:29:54","m_division_id":1}
+[2022-10-06T11:12:57.058] [INFO] default - 
+        TIMESTAMP => 2022-10-06 11:12:57,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionutil,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 62081,
+        ORIGINALURL => /apipos/actionutil/get_employee,    
+        DATA : {"statusCode":"200","error":null,"data":[{"employee_center_id":1449,"employee_center_code":"1000001","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"CIT","employee_center_lastname":"CAR","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"1098049804984","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"0848456978","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"1000001","m_employee_center_remark":"","m_employee_center_lastname":"CAR","m_employee_center_firstname":"CIT","m_employee_center_identity_card":"1098049804984","m_employee_company_mobile_number":"0848456978"},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2021-10-27T05:32:53.122Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1450,"employee_center_code":"1000002","prefix_id":2,"prefix_name":"นาง","employee_center_firstname":"CIT","employee_center_lastname":"MOTOR","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"60489409","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"0949849840","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":2,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาง","m_employee_center_code":"1000002","m_employee_center_remark":"","m_employee_center_lastname":"MOTOR","m_employee_center_firstname":"CIT","m_employee_center_identity_card":"60489409","m_employee_company_mobile_number":"0949849840"},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2021-10-27T05:33:34.769Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1451,"employee_center_code":"CIT002","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"Maroot","employee_center_lastname":"Khaijarapun","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"0000000000000","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"0000000000","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"CIT002","m_employee_center_remark":"","m_employee_center_lastname":"Khaijarapun","m_employee_center_firstname":"Maroot","m_employee_center_identity_card":"0000000000000","m_employee_company_mobile_number":"0000000000"},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2021-10-28T09:40:10.995Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1452,"employee_center_code":"044564654","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"     ","employee_center_lastname":"     ","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"044564654","m_employee_center_remark":"","m_employee_center_lastname":"     ","m_employee_center_firstname":"     ","m_employee_center_identity_card":"","m_employee_company_mobile_number":""},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2021-11-02T11:14:58.127Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1454,"employee_center_code":"SKM001","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"SKM","employee_center_lastname":"SKM","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"SKM001","m_employee_center_remark":"","m_employee_center_lastname":"SKM","m_employee_center_firstname":"SKM","m_employee_center_identity_card":"","m_employee_company_mobile_number":""},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2022-01-14T03:39:47.125Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1455,"employee_center_code":"skdm01","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"device","employee_center_lastname":"multiestamp","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_delete_flag":"N","m_division_id":1,"m_prefix_name":"นาย","m_employee_center_id":1455,"m_employee_center_code":"skdm01","m_employee_center_remark":"","m_employee_center_lastname":"multiestamp","m_employee_center_firstname":"device","m_employee_center_identity_card":"","m_employee_company_mobile_number":""},"employee_center_remark":"","sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2022-01-14T03:51:20.044Z","create_by":"1","update_date":"2022-01-14T06:48:19.209Z","update_by":"1","delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1456,"employee_center_code":"4564645614654","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"mview","employee_center_lastname":"mview","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"1564456456456","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"4564645614654","m_employee_center_remark":"","m_employee_center_lastname":"mview","m_employee_center_firstname":"mview","m_employee_center_identity_card":"1564456456456","m_employee_company_mobile_number":""},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2022-02-25T03:25:37.417Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0},{"employee_center_id":1457,"employee_center_code":"898989898989","prefix_id":1,"prefix_name":"นาย","employee_center_firstname":"ชวกร","employee_center_lastname":"ธรรมปพน","employee_center_nickname":null,"employee_center_birthday":null,"employee_center_identity_card":"1645614564654","employee_center_address":null,"sub_district_id":null,"sub_district_name":null,"district_id":null,"district_name":null,"province_id":null,"province_name":null,"zip_code":null,"employee_company_email":null,"employee_company_mobile_number":"0948899898","username":null,"passcode":null,"division_id":1,"company_id":1,"employee_center_flag":null,"employee_center_type":null,"employee_center_status":null,"employee_center_data":{"m_user":{"user_id":1,"user_name":"Administrator"},"m_prefix_id":1,"m_company_id":1,"m_division_id":1,"m_prefix_name":"นาย","m_employee_center_code":"898989898989","m_employee_center_remark":"","m_employee_center_lastname":"ธรรมปพน","m_employee_center_firstname":"ชวกร","m_employee_center_identity_card":"1645614564654","m_employee_company_mobile_number":"0948899898"},"employee_center_remark":null,"sync_flag":"N","read_flag":"N","update_flag":"N","create_date":"2022-02-25T04:22:44.093Z","create_by":"1","update_date":null,"update_by":null,"delete_flag":"N","delete_date":null,"delete_by":null,"sort_number":0}],"message":"OK"}
