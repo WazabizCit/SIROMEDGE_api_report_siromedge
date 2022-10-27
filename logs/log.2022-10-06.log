@@ -438,3 +438,63 @@
         REMOTE_PORT => 59599,
         ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/division,    
         DATA : {"statusCode":"200","error":null,"data":{"header_data":{"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","m_division":"1","cabinet_obj":{"cabinet_id":1,"cabinet_tax_code":"1234567890123","cabinet_name":"Gate IN Car 1 Tara 7","cabinet_type_id":1,"cabinet_status":"IN","cabinet_code":"CP-INC01","building_code":"0001","building_name":"TARAPark CP All","registered_no":null,"building_tax":"0994000165706","cabinet_ip_address":"10.100.101.182"}},"sub_data":[{"tci_id":"3518","card_name":"VC8B0E358","license_plate_text":"904","carparking_in_time":"29/09/2022 11:26:29","carparking_out_time":"29/09/2022 16:19:42","carparking_time_interval_text":"4 ชม. 53 นาที","carparking_time_interval_value":{"hours":4,"minutes":53,"seconds":12,"milliseconds":760.553},"estamp_info_time":"29/09/2022 11:31:36","estamp_info_id":13,"estamp_info_name":"1 ชั่วโมง","estamp_info_value":1,"estamp_info_interval":{"hours":1},"estamp_info_by":1449,"estamp_info_by_emp_code":"1000001","estamp_info_by_emp_name":"CIT CAR","company_id":"1","company_name":"CIT Company","division_id":"1","division_name":"CIT","over_estamp_value":"03:53:12"}]},"message":"OK"}
+[2022-10-06T12:34:22.213] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:22,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/date,    
+        DATA : {"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59"}
+[2022-10-06T12:34:22.593] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:22,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/date,    
+        DATA : {"statusCode":"200","error":null,"data":{"header_data":{"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","cabinet_obj":{"cabinet_id":1,"cabinet_tax_code":"1234567890123","cabinet_name":"Gate IN Car 1 Tara 7","cabinet_type_id":1,"cabinet_status":"IN","cabinet_code":"CP-INC01","building_code":"0001","building_name":"TARAPark CP All","registered_no":null,"building_tax":"0994000165706","cabinet_ip_address":"10.100.101.182"}},"sub_data":[{"tci_id":"3518","card_name":"VC8B0E358","license_plate_text":"904","carparking_in_time":"29/09/2022 11:26:29","carparking_out_time":"29/09/2022 16:19:42","carparking_time_interval_text":"4 ชม. 53 นาที","carparking_time_interval_value":{"hours":4,"minutes":53,"seconds":12,"milliseconds":760.553},"estamp_info_time":"29/09/2022 11:31:36","estamp_info_id":13,"estamp_info_name":"1 ชั่วโมง","estamp_info_value":1,"estamp_info_interval":{"hours":1},"estamp_info_by":1449,"estamp_info_by_emp_code":"1000001","estamp_info_by_emp_name":"CIT CAR","company_id":"1","company_name":"CIT Company","division_id":"1","division_name":"CIT","over_estamp_value":"03:53:12"}]},"message":"OK"}
+[2022-10-06T12:34:26.195] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:26,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/employee,    
+        DATA : {"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","m_employee":"1449"}
+[2022-10-06T12:34:26.503] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:26,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/employee,    
+        DATA : {"statusCode":"200","error":null,"data":{"header_data":{"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","m_employee":"1449","cabinet_obj":{"cabinet_id":1,"cabinet_tax_code":"1234567890123","cabinet_name":"Gate IN Car 1 Tara 7","cabinet_type_id":1,"cabinet_status":"IN","cabinet_code":"CP-INC01","building_code":"0001","building_name":"TARAPark CP All","registered_no":null,"building_tax":"0994000165706","cabinet_ip_address":"10.100.101.182"}},"sub_data":[{"tci_id":"3518","card_name":"VC8B0E358","license_plate_text":"904","carparking_in_time":"29/09/2022 11:26:29","carparking_out_time":"29/09/2022 16:19:42","carparking_time_interval_text":"4 ชม. 53 นาที","carparking_time_interval_value":{"hours":4,"minutes":53,"seconds":12,"milliseconds":760.553},"estamp_info_time":"29/09/2022 11:31:36","estamp_info_id":13,"estamp_info_name":"1 ชั่วโมง","estamp_info_value":1,"estamp_info_interval":{"hours":1},"estamp_info_by":1449,"estamp_info_by_emp_code":"1000001","estamp_info_by_emp_name":"CIT CAR","company_id":"1","company_name":"CIT Company","division_id":"1","division_name":"CIT","over_estamp_value":"03:53:12"}]},"message":"OK"}
+[2022-10-06T12:34:30.161] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:30,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => REQ,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/division,    
+        DATA : {"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","m_division":"1"}
+[2022-10-06T12:34:30.488] [INFO] default - 
+        TIMESTAMP => 2022-10-06 12:34:30,
+        APP_NAME => api_report_siromedge,
+        SUB_APP_NAME => /apipos/actionreports/visitor,
+        NODE_ID => 0,
+        STATUS => RES,
+        REMOTE_ADDRESS => ::1,
+        REMOTE_PORT => 52320,
+        ORIGINALURL => /apipos/actionreports/visitor/vt_parking_estamp_visitor_history/division,    
+        DATA : {"statusCode":"200","error":null,"data":{"header_data":{"m_report_id":"VCI0001","m_report_name":"รายงานการชำระเงิน","m_car_type":"VISTOR CAR","m_building_name":"ส.ขอนแก่น","m_report_start":"2022-09-01 00:00:00","m_report_end":"2022-10-30 23:59:59","m_division":"1","cabinet_obj":{"cabinet_id":1,"cabinet_tax_code":"1234567890123","cabinet_name":"Gate IN Car 1 Tara 7","cabinet_type_id":1,"cabinet_status":"IN","cabinet_code":"CP-INC01","building_code":"0001","building_name":"TARAPark CP All","registered_no":null,"building_tax":"0994000165706","cabinet_ip_address":"10.100.101.182"}},"sub_data":[{"tci_id":"3518","card_name":"VC8B0E358","license_plate_text":"904","carparking_in_time":"29/09/2022 11:26:29","carparking_out_time":"29/09/2022 16:19:42","carparking_time_interval_text":"4 ชม. 53 นาที","carparking_time_interval_value":{"hours":4,"minutes":53,"seconds":12,"milliseconds":760.553},"estamp_info_time":"29/09/2022 11:31:36","estamp_info_id":13,"estamp_info_name":"1 ชั่วโมง","estamp_info_value":1,"estamp_info_interval":{"hours":1},"estamp_info_by":1449,"estamp_info_by_emp_code":"1000001","estamp_info_by_emp_name":"CIT CAR","company_id":"1","company_name":"CIT Company","division_id":"1","division_name":"CIT","over_estamp_value":"03:53:12"}]},"message":"OK"}

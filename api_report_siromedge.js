@@ -20,8 +20,8 @@ app.listen(config.main_config.PORT, () => {
 
 // // //Report
 const actionreports_visitor = require('./routes/action_reports_visitor_route');
-const actionreports_analyst = require('./routes/action_reports_analyst_route');
 const actionreports_member = require('./routes/action_reports_member_route');
+const actionreports_analyst = require('./routes/action_reports_analyst_route');
 const actionutil = require('./routes/action_util_route');
 
 
