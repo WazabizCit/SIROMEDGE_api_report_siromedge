@@ -12,11 +12,15 @@ exports.db_action_get_employee = function (obj, callback) {
 
   const query = {
     text: `SELECT 
-    *
-    FROM
-    mcv_employee_center
-    WHERE
-    division_id = $1`,
+    employee_center_id,employee_center_code,employee_center_firstname,employee_center_lastname,mcvec.division_id,mcvec.company_id,mcvc.company_name,mcvd.division_name as division_name
+      FROM
+      mcv_employee_center mcvec
+    LEFT JOIN mcv_division mcvd
+      ON mcvec.division_id = mcvd.division_id
+    LEFT JOIN mcv_company mcvc
+      ON mcvec.company_id = mcvc.company_id
+      WHERE
+      mcvec.division_id = $1`,
     values: [division_id],
   }
 

@@ -149,8 +149,6 @@ exports.db_action_vt_parking_member_motorcycle_history = function (obj, callback
   let report_end = obj.m_report_end
 
 
-
-
   const query = {
     text: `  
 select tci_id,tci.card_status,car_type_status,  card_code,card_signature,employee_id,employee_name,license_plate_text,

@@ -6,6 +6,9 @@ const pool = require("../config/db_con");
 
 exports.db_action_parking_outstanding = function (obj, callback) {
 
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+
 
 const query = {
   text: `
@@ -31,9 +34,10 @@ const query = {
   license_plate_text,
   fun_parking_datetime_format(carparking_in_time) AS carparking_in_time
   FROM t_carparking_info 
-  WHERE tci_status = 'N'
+  WHERE tci_status = 'N' AND 
+  carparking_in_time::timestamp between $1::timestamp AND $2::timestamp
   ORDER BY card_type_id,carparking_in_time`,
-  values: [],
+  values: [report_start,report_end],
 }
 
 pool.connect().then(client => {
