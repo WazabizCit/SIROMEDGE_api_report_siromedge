@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "api_report_siromedge.js",
   "scripts": {
     "start": "nodemon  api_report_siromedge.js"
   },
@@ -23,5 +24,9 @@
     "response-format": "^1.2.0",
     "string-similarity": "^3.0.0",
     "log4js": "^6.4.7"
+  },
+  "pkg": {
+    "targets": [ "node16-win-x64" ],
+    "outputPath": "dist"
   }
 }

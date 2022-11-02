@@ -192,28 +192,31 @@ exports.db_action_get_all_cabinet_type = function (obj, callback) {
 
 
 
-
 exports.db_cabinet_status = function (obj, callback) {
 
-  let cabinet_ip_address = '10.100.101.182'
+  let cabinet_ip_address = obj.cabinet_ipaddress_real
+
+
 
 
   const query = {
-    text: `
-   SELECT 
-   cabinet_id,
-   cabinet_tax_code,
-   cabinet_name,
-   cabinet_type_id,
-   cabinet_status,
-   cabinet_code,
-   building_code,
-   building_name,
-   reg_no as registered_no,
-   mb.registered_no as building_tax,
-   cabinet_ip_address
-   FROM m_cabinet mc 
-   JOIN m_building mb ON mc.building_id = mb.building_id 
+    text: `   
+ SELECT 
+ cabinet_id,
+ cabinet_tax_code,
+ cabinet_name,
+ mc.cabinet_type_id,
+ mct.cabinet_type_name,
+ cabinet_status,
+ cabinet_code,
+ building_code,
+ building_name,
+ reg_no as registered_no,
+ mb.registered_no as building_tax,
+ cabinet_ip_address
+ FROM m_cabinet mc 
+ JOIN m_building mb ON mc.building_id = mb.building_id 
+ JOIN m_cabinet_type mct ON mc.cabinet_type_id = mct.cabinet_type_id 
    WHERE mc.delete_flag = 'N' AND cabinet_ip_address = $1`,
     values: [cabinet_ip_address],
   }
@@ -234,7 +237,6 @@ exports.db_cabinet_status = function (obj, callback) {
     })
 
 }
-
 
 
 

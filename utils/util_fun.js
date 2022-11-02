@@ -7,7 +7,7 @@ log4js.configure({
     appenders: {
         appender: {
             type: 'file',
-            filename: 'logs/log',
+            filename: `../logs/${config.main_config.APP_NAME}/log`,
             keepFileExt: true,
             compress: true,
             pattern: 'yyyy-MM-dd.log',
