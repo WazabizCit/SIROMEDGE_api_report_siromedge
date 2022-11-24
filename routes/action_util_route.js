@@ -6,7 +6,6 @@ const format = require('response-format');
 
 
 const {
-    action_get_all_cabinet_payment_status,
     action_get_all_cabinet_type,
     action_get_all_company,
     action_get_division,
@@ -17,16 +16,10 @@ const {
 
 
 
-router.post('/get_all_cabinet_payment_status',
-    mid_data.data_mid,
-    cabinet_middle.check_cabinet_code,
-    action_get_all_cabinet_payment_status
-);
 
 
 
-
-router.post('/get_all_cabinet_type',
+router.post('/get_all_cabinet_type_payment',
     mid_data.data_mid,
     cabinet_middle.check_cabinet_code,
     action_get_all_cabinet_type

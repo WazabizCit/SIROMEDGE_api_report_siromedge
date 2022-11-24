@@ -5,15 +5,58 @@ const pool = require("../config/db_con");
 
 
 
-exports.db_action_vt_parking_in_visitor_info = function (obj, callback) {
+exports.db_action_vt_parking_payment_visitor_info = function (obj, callback) {
 
     let report_start = obj.m_report_start
     let report_end = obj.m_report_end
     let cabinet_payment_id = obj.m_cabinet_payment_id
+
+    
   
     const query = {
-      text: ``,
-      values: [],
+      text: `SELECT 
+      tcpi_id,
+      cabinet_payment_code,
+      cabinet_payment_name,
+      payment_type_name_th AS payment_type_name,
+      receipt_no,
+      card_code,
+      card_signature,
+      license_plate_text,
+      car_type_status,
+      fun_parking_datetime_format(carparking_in_time) AS carparking_in_time,
+      cabinet_in_name,
+      fun_parking_datetime_format(carparking_out_time) AS carparking_out_time,
+      cabinet_out_name,
+      carparking_interval,
+      vppvi.estamp_info_id,
+      vppvi.estamp_info_name,
+      fun_parking_datetime_format(estamp_info_time) AS estamp_info_time,
+      estamp_info_by,
+      employee_center_code AS estamp_info_by_code,
+      (employee_firstname_estamp||' '||employee_center_code) AS estamp_employee_name,
+      company_name AS company_name_estamp,
+      division_name AS division_name_estamp,
+      fun_parking_datetime_format(payment_time) AS payment_time,
+      payment_fee_amount,
+      payment_vat,
+      payment_fine_amount,
+      payment_total,
+      create_emp_fullname as pos_emp_fullname,
+      (SELECT sps_json_data->>'domain_get_img' AS domain_get_img  FROM m_system_parking_setup WHERE sps_id = 28 ),
+      cabinet_in_send_data->>'m_location_car_picture' as location_car_picture_in,
+      cabinet_in_send_data->>'m_location_user_picture' as location_user_picture_in,
+      cabinet_out_send_data->>'m_location_car_picture' as location_car_picture_out,
+      cabinet_out_send_data->>'m_location_user_picture' as location_user_picture_out
+      FROM 
+      vt_parking_payment_visitor_info vppvi 
+      WHERE 
+      vppvi.cabinet_payment_id =  $3 AND 
+      payment_type_id NOT IN(1)   AND
+      payment_time BETWEEN $1::timestamp AND $2::timestamp
+      ORDER BY payment_type_id,payment_time,receipt_running_number
+    `,
+      values: [report_start,report_end,cabinet_payment_id],
     }
   
     pool.connect().then(client => {
@@ -207,7 +250,7 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
       mcv_division mcvd ON (tci.estamp_info_data->0->>'division_id')::integer = mcvd.division_id 
       
       WHERE 
-      tci.card_type_id = 1 AND
+      tci.card_type_id in(1,2) AND
       tci.tci_status = 'Y' AND
       tci.estamp_info_status = true  AND
       tci.carparking_in_time BETWEEN 
@@ -308,7 +351,7 @@ exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, ca
       mcv_division mcvd ON (tci.estamp_info_data->0->>'division_id')::integer = mcvd.division_id 
       
       WHERE 
-      tci.card_type_id = 1 AND
+      tci.card_type_id in(1,2) AND
       tci.tci_status = 'Y' AND
       tci.estamp_info_status = true  AND
       tci.carparking_in_time BETWEEN 
@@ -411,7 +454,7 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
       mcv_division mcvd ON (tci.estamp_info_data->0->>'division_id')::integer = mcvd.division_id 
       
       WHERE 
-      tci.card_type_id = 1 AND
+      tci.card_type_id in(1,2) AND
       tci.tci_status = 'Y' AND
       tci.estamp_info_status = true  AND
       tci.carparking_in_time BETWEEN 

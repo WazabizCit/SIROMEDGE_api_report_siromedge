@@ -116,46 +116,9 @@ exports.db_action_get_all_company = function (obj, callback) {
 
 
 
-exports.db_action_get_all_cabinet_payment_status = function (obj, callback) {
-  
-  const query = {
-    text: `SELECT cabinet_status 
-    FROM 
-    m_cabinet 
-    WHERE cabinet_status = 'PAYMENT'
-    GROUP BY 
-    cabinet_status
-    ORDER BY 1`,
-    values: [],
-  }
-
-  pool.connect().then(client => {
-    return client.query(query)
-      .then(result => {
-
-        client.release(true)
-        return callback(false, result.rows)
-
-      })
-      .catch(err => {
-        console.log(err)
-        client.release(true)
-        return callback(true, null)
-
-      })
-  })
-
-
-
-}
-
-
-
-
-
 exports.db_action_get_all_cabinet_type = function (obj, callback) {
 
-  let type_cabinet = obj.m_type_cabinet
+
   
   const query = {
     text: `SELECT 
@@ -165,9 +128,9 @@ exports.db_action_get_all_cabinet_type = function (obj, callback) {
     FROM 
     m_cabinet 
     WHERE 
-    cabinet_status = $1
+    cabinet_status in('WEB_PAYMENT','PAYMENT')
     ORDER BY 1`,
-    values: [type_cabinet],
+    values: [],
   }
 
   pool.connect().then(client => {

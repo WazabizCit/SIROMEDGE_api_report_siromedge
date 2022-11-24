@@ -13,16 +13,16 @@ const config_env = {
 
 
 
-        // // PRODUCTTION 
-        // HOST_DB: "localhost",
-        // PORT_DB: 9001,
-        // DATABASE_DB: "cit_parking_silomedge_db",
-        // USER_DB: "postgres",
-        // PASSWORD_DB: "Cit@pwddb",
-        // max: 20,
-        // idleTimeoutMillis: 0,
-        // connectionTimeoutMillis: 2000,
-
+     
+        //   // PRODUCTTION 
+        //   HOST_DB: "localhost",
+        //   PORT_DB: 35432,
+        //   DATABASE_DB: "cit_parking_db",
+        //   USER_DB: "postgres",
+        //   PASSWORD_DB: "Cit@pwddb",
+        //   max: 20,
+        //   idleTimeoutMillis: 0,
+        //   connectionTimeoutMillis: 2000,
         
 
     },
