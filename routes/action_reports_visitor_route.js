@@ -5,8 +5,8 @@ const mid_data = require("../middleware/data_middle");
 const format = require('response-format');
 
 
-const { 
-    
+const {
+
     action_vt_parking_payment_visitor_info_by_id_cabinet,
     action_vt_parking_payment_visitor_info_all_cabinet,
     action_vt_parking_visitor_car_history,
@@ -14,20 +14,13 @@ const {
     action_vt_parking_estamp_visitor_history_date,
     action_vt_parking_estamp_visitor_history_employee,
     action_vt_parking_estamp_visitor_history_division,
-    action_vt_parking_payment_visitor_min_max_receipt
+    action_vt_parking_payment_visitor_min_max_receipt,
+    action_vt_parking_visitor_card_lost_and_damaged_history,
+    action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle,
+    action_vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycle,
+    action_vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle
 
 } = require("../controllers/action_reports_visitor_controller");
-
-
-
-
-
-
-router.post('/vt_parking_payment_visitor_info_by_id_cabinet',
-    mid_data.data_mid,
-    cabinet_middle.check_cabinet_code,
-    action_vt_parking_payment_visitor_info_by_id_cabinet
-);
 
 
 
@@ -38,12 +31,45 @@ router.post('/vt_parking_payment_visitor_info_all_cabinet',
     action_vt_parking_payment_visitor_info_all_cabinet
 );
 
+router.post('/vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle
+);
+
+
+
+router.post('/vt_parking_payment_visitor_info_by_id_cabinet',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_payment_visitor_info_by_id_cabinet
+);
+
+
+router.post('/vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycle',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycle
+);
+
+
+
+
+
 
 router.post('/vt_parking_payment_visitor_min_max_receipt',
     mid_data.data_mid,
     cabinet_middle.check_cabinet_code,
     action_vt_parking_payment_visitor_min_max_receipt
 );
+
+
+router.post('/vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle
+);
+
 
 
 
@@ -87,6 +113,21 @@ router.post('/vt_parking_estamp_visitor_history/division',
     cabinet_middle.check_cabinet_code,
     action_vt_parking_estamp_visitor_history_division
 );
+
+
+
+
+
+
+
+
+
+router.post('/vt_parking_visitor_card_lost_and_damaged_history',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_visitor_card_lost_and_damaged_history
+);
+
 
 
 

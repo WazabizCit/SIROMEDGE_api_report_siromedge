@@ -1,9 +1,61 @@
-
-
 const pool = require("../config/db_con");
 
 
 
+
+
+exports.db_action_vt_parking_visitor_card_lost_and_damaged_history = function (obj, callback) {
+
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let card_status = obj.m_card_status
+
+  const query = {
+    text: `
+    SELECT 
+        lcfi.tlcfi_id, 
+        tci.card_signature as card_name,
+        tci.card_status,
+        tci.license_plate_text,
+        tci.car_type_status,
+        fun_parking_datetime_format(tci.carparking_in_time) AS carparking_in_time,
+        payment_type_name_th,
+        payment_event_name_th,
+        lcfi.receipt_no,
+        lcfi.payment_totle AS payment_total,	
+        mey.employee_code as employee_code_pos ,
+        (mey.first_name_th ||' '||mey.last_name_th) AS employee_fullname_pos,	
+        fun_parking_datetime_format(lcfi.payment_time) as payment_time
+        FROM 
+        t_lost_card_fine_info lcfi 
+        LEFT JOIN t_carparking_info tci ON lcfi.tci_id = tci.tci_id
+        LEFT JOIN m_payment_type mpt ON lcfi.payment_type_id = mpt.payment_type_id 
+        LEFT JOIN m_payment_event mpe ON lcfi.payment_event_id = mpe.payment_event_id 
+        LEFT JOIN m_card mc ON lcfi.card_code = mc.card_code 
+        LEFT JOIN m_employee mey ON lcfi.create_by::integer = mey.employee_id
+        WHERE lcfi.payment_event_id IN(6,7,16,17) 	
+        AND tci.card_status = $3
+        AND (lcfi.payment_time BETWEEN $1::timestamp AND $2::timestamp)
+        ORDER BY lcfi.payment_time`,
+    values: [report_start, report_end,card_status],
+  }
+  pool
+    .connect()
+    .then(client => {
+      return client
+        .query(query)
+        .then(result => {
+          client.release(true)
+          return callback(null, result.rows)
+        })
+        .catch(err => {
+          console.log(err)
+          client.release(true)
+          return callback(null, null)
+        })
+    })
+
+}
 
 
 
@@ -30,14 +82,15 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt = function (obj, ca
     to_char(MIN(receipt_running_number),'00000') AS min_receipt_no,
     to_char(MAX(receipt_running_number),'00000') AS max_receipt_no,
     SUM(payment_fee_amount) AS sum_payment_fee_amount,
-    SUM(payment_vat) AS sum_payment_vat
-   FROM 
-   vt_parking_payment_visitor_info 
-   WHERE 
-   payment_time::DATE BETWEEN $1::timestamp AND $2::timestamp
-   GROUP BY 
-   cabinet_payment_id,
-   cabinet_payment_code,
+    SUM(payment_vat) AS sum_payment_vat,
+    SUM(payment_fine_amount) AS sum_payment_fine_amount
+    FROM 
+    vt_parking_payment_visitor_info 
+    WHERE 
+    payment_time::DATE BETWEEN $1::timestamp AND $2::timestamp
+    GROUP BY 
+    cabinet_payment_id,
+    cabinet_payment_code,
     cabinet_payment_tax_code,
     cabinet_payment_name,
     to_char(payment_time,'DD/MM/YYYY'),
@@ -53,7 +106,7 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt = function (obj, ca
     ORDER BY 
     cabinet_payment_id,card_type_id,payment_type_id,payment_event_id
   `,
-    values: [report_start,report_end],
+    values: [report_start, report_end],
   }
 
   pool.connect().then(client => {
@@ -79,13 +132,18 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt = function (obj, ca
 
 
 
+
+
+
+
+
 exports.db_action_vt_parking_payment_visitor_info_all_cabinet = function (obj, callback) {
 
   let report_start = obj.m_report_start
   let report_end = obj.m_report_end
 
 
-  
+
 
   const query = {
     text: `SELECT 
@@ -132,7 +190,7 @@ exports.db_action_vt_parking_payment_visitor_info_all_cabinet = function (obj, c
     payment_time BETWEEN $1::timestamp AND $2::timestamp
     ORDER BY payment_type_id,payment_time,receipt_running_number
   `,
-    values: [report_start,report_end],
+    values: [report_start, report_end],
   }
 
   pool.connect().then(client => {
@@ -162,14 +220,14 @@ exports.db_action_vt_parking_payment_visitor_info_all_cabinet = function (obj, c
 
 exports.db_action_vt_parking_payment_visitor_info_by_id_cabinet = function (obj, callback) {
 
-    let report_start = obj.m_report_start
-    let report_end = obj.m_report_end
-    let cabinet_payment_id = obj.m_cabinet_payment_id
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let cabinet_payment_id = obj.m_cabinet_payment_id
 
-    
-  
-    const query = {
-      text: `SELECT 
+
+
+  const query = {
+    text: `SELECT 
       tcpi_id,
       cabinet_payment_code,
       cabinet_payment_name,
@@ -213,35 +271,35 @@ exports.db_action_vt_parking_payment_visitor_info_by_id_cabinet = function (obj,
       payment_time BETWEEN $1::timestamp AND $2::timestamp
       ORDER BY payment_type_id,payment_time,receipt_running_number
     `,
-      values: [report_start,report_end,cabinet_payment_id],
-    }
-  
-    pool.connect().then(client => {
-      return client.query(query)
-        .then(result => {
-  
-          client.release(true)
-          return callback(false, result.rows)
-  
-        })
-        .catch(err => {
-          console.log(err)
-          client.release(true)
-          return callback(true, null)
-  
-        })
-    })
-  
-  
-  
+    values: [report_start, report_end, cabinet_payment_id],
   }
-  
-  
+
+  pool.connect().then(client => {
+    return client.query(query)
+      .then(result => {
+
+        client.release(true)
+        return callback(false, result.rows)
+
+      })
+      .catch(err => {
+        console.log(err)
+        client.release(true)
+        return callback(true, null)
+
+      })
+  })
 
 
-  
 
-  
+}
+
+
+
+
+
+
+
 
 exports.db_action_vt_parking_visitor_car_history = function (obj, callback) {
 
@@ -662,3 +720,248 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
 
 
 
+
+
+
+
+exports.db_action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle = function (obj, callback) {
+
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let card_status =  obj.m_card_status
+
+
+
+
+
+  const query = {
+    text: `SELECT 
+    tcpi_id,
+    cabinet_payment_code,
+    cabinet_payment_name,
+    payment_type_name_th AS payment_type_name,
+    receipt_no,
+    card_code,
+    card_signature,
+    license_plate_text,
+    car_type_status,
+    fun_parking_datetime_format(carparking_in_time) AS carparking_in_time,
+    cabinet_in_name,
+    fun_parking_datetime_format(carparking_out_time) AS carparking_out_time,
+    cabinet_out_name,
+    carparking_interval,
+    vppvi.estamp_info_id,
+    vppvi.estamp_info_name,
+    fun_parking_datetime_format(estamp_info_time) AS estamp_info_time,
+    estamp_info_by,
+    employee_center_code AS estamp_info_by_code,
+    (employee_firstname_estamp||' '||employee_center_code) AS estamp_employee_name,
+    company_name AS company_name_estamp,
+    division_name AS division_name_estamp,
+    fun_parking_datetime_format(payment_time) AS payment_time,
+    payment_fee_amount,
+    payment_vat,
+    payment_fine_amount,
+    payment_fine_vat,
+    payment_total,
+    cabinet_payment_data ->> 'ref1' as ref1,
+    cabinet_payment_data ->> 'ref2' as ref2,
+    create_emp_fullname as pos_emp_fullname,
+    (SELECT sps_json_data->>'domain_get_img' AS domain_get_img  FROM m_system_parking_setup WHERE sps_id = 28 ),
+    cabinet_in_send_data->>'m_location_car_picture' as location_car_picture_in,
+    cabinet_in_send_data->>'m_location_user_picture' as location_user_picture_in,
+    cabinet_out_send_data->>'m_location_car_picture' as location_car_picture_out,
+    cabinet_out_send_data->>'m_location_user_picture' as location_user_picture_out
+    FROM 
+    vt_parking_payment_visitor_info vppvi 
+    WHERE 
+    vppvi.cabinet_payment_id in(7,8,9,10,11,12,13,18,19,20) AND 
+    payment_type_id NOT IN(1)   AND 
+    card_status = $3 AND
+    payment_time BETWEEN $1::timestamp AND $2::timestamp
+    ORDER BY payment_type_id,payment_time,receipt_running_number
+  `,
+    values: [report_start, report_end,card_status],
+  }
+
+  pool.connect().then(client => {
+    return client.query(query)
+      .then(result => {
+
+        client.release(true)
+        return callback(false, result.rows)
+
+      })
+      .catch(err => {
+        console.log(err)
+        client.release(true)
+        return callback(true, null)
+
+      })
+  })
+
+
+
+}
+
+
+
+
+
+exports.db_action_vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycle = function (obj, callback) {
+
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let cabinet_payment_id = obj.m_cabinet_payment_id
+  let card_status =  obj.m_card_status
+
+
+
+  const query = {
+    text: `SELECT 
+      tcpi_id,
+      cabinet_payment_code,
+      cabinet_payment_name,
+      payment_type_name_th AS payment_type_name,
+      receipt_no,
+      card_code,
+      card_signature,
+      license_plate_text,
+      car_type_status,
+      fun_parking_datetime_format(carparking_in_time) AS carparking_in_time,
+      cabinet_in_name,
+      fun_parking_datetime_format(carparking_out_time) AS carparking_out_time,
+      cabinet_out_name,
+      carparking_interval,
+      vppvi.estamp_info_id,
+      vppvi.estamp_info_name,
+      fun_parking_datetime_format(estamp_info_time) AS estamp_info_time,
+      estamp_info_by,
+      employee_center_code AS estamp_info_by_code,
+      (employee_firstname_estamp||' '||employee_center_code) AS estamp_employee_name,
+      company_name AS company_name_estamp,
+      division_name AS division_name_estamp,
+      fun_parking_datetime_format(payment_time) AS payment_time,
+      payment_fee_amount,
+      payment_vat,
+      payment_fine_amount,
+      payment_fine_vat,
+      payment_total,
+      cabinet_payment_data ->> 'ref1' as ref1,
+      cabinet_payment_data ->> 'ref2' as ref2,
+      create_emp_fullname as pos_emp_fullname,
+      (SELECT sps_json_data->>'domain_get_img' AS domain_get_img  FROM m_system_parking_setup WHERE sps_id = 28 ),
+      cabinet_in_send_data->>'m_location_car_picture' as location_car_picture_in,
+      cabinet_in_send_data->>'m_location_user_picture' as location_user_picture_in,
+      cabinet_out_send_data->>'m_location_car_picture' as location_car_picture_out,
+      cabinet_out_send_data->>'m_location_user_picture' as location_user_picture_out
+      FROM 
+      vt_parking_payment_visitor_info vppvi 
+      WHERE 
+      vppvi.cabinet_payment_id =  $3 AND 
+      payment_type_id NOT IN(1)   AND
+      card_status = $4 AND
+      payment_time BETWEEN $1::timestamp AND $2::timestamp
+      ORDER BY payment_type_id,payment_time,receipt_running_number
+    `,
+    values: [report_start, report_end, cabinet_payment_id,card_status],
+  }
+
+  pool.connect().then(client => {
+    return client.query(query)
+      .then(result => {
+
+        client.release(true)
+        return callback(false, result.rows)
+
+      })
+      .catch(err => {
+        console.log(err)
+        client.release(true)
+        return callback(true, null)
+
+      })
+  })
+
+
+
+}
+
+
+
+
+
+
+
+exports.db_action_vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle = function (obj, callback) {
+
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let card_status =  obj.m_card_status
+
+
+  const query = {
+    text: `SELECT 
+    cabinet_payment_id,
+    cabinet_payment_code,
+    cabinet_payment_tax_code,
+    cabinet_payment_name,
+    to_char(payment_time,'DD/MM/YYYY') AS payment_time,
+    payment_type_code,
+    payment_type_name_th,
+    payment_event_code,
+    payment_event_name_th,
+    card_type_id,
+    car_type_status,
+    receipt_code,
+    to_char(MIN(receipt_running_number),'00000') AS min_receipt_no,
+    to_char(MAX(receipt_running_number),'00000') AS max_receipt_no,
+    SUM(payment_fee_amount) AS sum_payment_fee_amount,
+    SUM(payment_vat) AS sum_payment_vat,
+    SUM(payment_fine_amount) AS sum_payment_fine_amount,
+    SUM(payment_fine_vat) AS sum_payment_fine_vat
+    FROM 
+    vt_parking_payment_visitor_info 
+    WHERE 
+    payment_time::DATE BETWEEN $1::timestamp AND $2::timestamp AND
+    card_status = $3
+    GROUP BY 
+    cabinet_payment_id,
+    cabinet_payment_code,
+    cabinet_payment_tax_code,
+    cabinet_payment_name,
+    to_char(payment_time,'DD/MM/YYYY'),
+    payment_type_id,
+    payment_type_code,
+    payment_type_name_th,
+    payment_event_id,
+    payment_event_code,
+    payment_event_name_th,
+    card_type_id,
+    car_type_status,
+    receipt_code
+    ORDER BY 
+    cabinet_payment_id,card_type_id,payment_type_id,payment_event_id
+  `,
+    values: [report_start, report_end,card_status],
+  }
+
+  pool.connect().then(client => {
+    return client.query(query)
+      .then(result => {
+
+        client.release(true)
+        return callback(false, result.rows)
+
+      })
+      .catch(err => {
+        console.log(err)
+        client.release(true)
+        return callback(true, null)
+
+      })
+  })
+
+
+
+}
