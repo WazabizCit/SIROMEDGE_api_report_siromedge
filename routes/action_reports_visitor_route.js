@@ -12,6 +12,7 @@ const {
     action_vt_parking_visitor_car_history,
     action_vt_parking_visitor_motorcycle_history,
     action_vt_parking_estamp_visitor_history_date,
+    action_vt_parking_estamp_visitor_history_company,
     action_vt_parking_estamp_visitor_history_employee,
     action_vt_parking_estamp_visitor_history_division,
     action_vt_parking_payment_visitor_min_max_receipt,
@@ -112,6 +113,13 @@ router.post('/vt_parking_estamp_visitor_history/division',
     mid_data.data_mid,
     cabinet_middle.check_cabinet_code,
     action_vt_parking_estamp_visitor_history_division
+);
+
+
+router.post('/vt_parking_estamp_visitor_history/company',
+    mid_data.data_mid,
+    cabinet_middle.check_cabinet_code,
+    action_vt_parking_estamp_visitor_history_company
 );
 
 

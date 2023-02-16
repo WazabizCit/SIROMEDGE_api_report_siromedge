@@ -37,7 +37,7 @@ exports.db_action_vt_parking_visitor_card_lost_and_damaged_history = function (o
         AND tci.card_status = $3
         AND (lcfi.payment_time BETWEEN $1::timestamp AND $2::timestamp)
         ORDER BY lcfi.payment_time`,
-    values: [report_start, report_end,card_status],
+    values: [report_start, report_end, card_status],
   }
   pool
     .connect()
@@ -429,7 +429,118 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
       $2::timestamp  AS input_time_from,
       0::integer AS input_employee_id,
       0::integer AS input_company_id,
-      0::integer AS input_division_id
+      0::integer AS input_division_id,
+      '30 mins'::interval AS input_case_free_over_time
+    ),
+    result_data AS(
+      SELECT  
+      tci_id,
+      cabinet_in_send_data->'m_card_obj'->>'card_name' AS card_name,
+      license_plate_text,
+      fun_parking_datetime_format(carparking_in_time) AS carparking_in_time,
+      fun_parking_datetime_format(carparking_out_time) AS carparking_out_time,
+      fun_get_parking_datetime_interval(carparking_in_time,carparking_out_time) AS carparking_time_interval_text,
+      carparking_out_time - carparking_in_time  AS carparking_time_interval_value,
+      fun_parking_datetime_format(estamp_info_time) AS estamp_info_time,
+      tci.estamp_info_id,
+      estamp_info_name,
+      estamp_info_value,
+      (estamp_info_value ||' '||estamp_info_unit)::interval AS estamp_info_interval,
+      tci.estamp_info_by,
+      (employee_center_code) AS estamp_info_by_emp_code,
+      (employee_center_firstname ||' '||employee_center_lastname) AS estamp_info_by_emp_name,
+      tci.estamp_info_data->0->>'card_name' AS card_name,
+      tci.estamp_info_data->0->>'company_id' AS company_id,
+      mcvc.company_name,
+      tci.estamp_info_data->0->>'division_id' AS division_id,
+      mcvd.division_name
+      FROM 
+      t_carparking_info tci 
+      LEFT JOIN 
+      mv_estamp_info mvei ON tci.estamp_info_id = mvei.estamp_info_id 
+      LEFT JOIN 
+      mcv_employee_center mcvec ON tci.estamp_info_by = mcvec.employee_center_id 
+      LEFT JOIN
+      mcv_company mcvc ON (tci.estamp_info_data->0->>'company_id')::integer = mcvc.company_id
+      LEFT JOIN
+      mcv_division mcvd ON (tci.estamp_info_data->0->>'division_id')::integer = mcvd.division_id 
+      
+      WHERE 
+      tci.card_type_id in(1,2) AND
+      tci.tci_status = 'Y' AND
+      tci.estamp_info_status = true  AND
+      tci.carparking_in_time BETWEEN 
+      (SELECT input_time_to FROM input_data) AND (SELECT input_time_from FROM input_data)
+      
+      
+    )
+    SELECT 
+    *,
+        (
+                CASE WHEN carparking_time_interval_value <= (SELECT input_case_free_over_time FROM input_data) THEN
+                true
+                ELSE
+                false
+                END
+        )
+        AS is_less_time_than_free_parking,
+    to_char(
+      CASE WHEN 
+      (carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
+      carparking_time_interval_value - estamp_info_interval 
+      ELSE
+      '00:00:00'::interval
+      END
+    ,'HH24:MI:SS') AS over_estamp_value
+    FROM result_data 
+    ORDER BY 
+    carparking_in_time,
+    company_id::integer,
+    division_id::integer,
+    estamp_info_by
+`,
+    values: [report_start, report_end],
+  }
+
+  pool.connect().then(client => {
+    return client.query(query)
+      .then(result => {
+
+        client.release(true)
+        return callback(false, result.rows)
+
+      })
+      .catch(err => {
+        client.release(true)
+        console.log(err)
+        return callback(true, null)
+
+      })
+  })
+
+
+
+}
+
+
+
+
+
+exports.db_action_vt_parking_estamp_visitor_history_company = function (obj, callback) {
+
+  let report_start = obj.m_report_start
+  let report_end = obj.m_report_end
+  let company = obj.m_company
+
+  const query = {
+    text: `WITH input_data AS(
+      SELECT 
+      $1::timestamp  AS input_time_to,
+      $2::timestamp  AS input_time_from,
+      0::integer AS input_employee_id,
+      $3::integer AS input_company_id,
+      0::integer AS input_division_id,
+      '30 mins'::interval AS input_case_free_over_time
     ),
     result_data AS(
       SELECT  
@@ -475,21 +586,31 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
     )
     SELECT 
     *,
-    to_char(
-      CASE WHEN 
-      (carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
-      carparking_time_interval_value - estamp_info_interval 
-      ELSE
-      '00:00:00'::interval
-      END
-    ,'HH24:MI:SS') AS over_estamp_value
-    FROM result_data 
-    ORDER BY 
-    carparking_in_time,
-    company_id::integer,
-    division_id::integer,
-    estamp_info_by`,
-    values: [report_start, report_end],
+    (
+            CASE WHEN carparking_time_interval_value <= (SELECT input_case_free_over_time FROM input_data) THEN
+            true
+            ELSE
+            false
+            END
+    )
+    AS is_less_time_than_free_parking,
+  to_char(
+	CASE WHEN 
+	(carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
+	carparking_time_interval_value - estamp_info_interval 
+	ELSE
+	'00:00:00'::interval
+	END
+  ,'HH24:MI:SS') AS over_estamp_value
+  FROM result_data 
+  WHERE
+  company_id::integer = (SELECT input_company_id FROM input_data)
+  ORDER BY 
+  carparking_in_time,
+  company_id::integer,
+  division_id::integer,
+  estamp_info_by`,
+    values: [report_start, report_end, company],
   }
 
   pool.connect().then(client => {
@@ -516,7 +637,6 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
 
 
 
-
 exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, callback) {
 
   let report_start = obj.m_report_start
@@ -530,7 +650,8 @@ exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, ca
       $2::timestamp  AS input_time_from,
       $3::integer AS input_employee_id,
       0::integer AS input_company_id,
-      0::integer AS input_division_id
+      0::integer AS input_division_id,
+      '30 mins'::interval AS input_case_free_over_time
     ),
     result_data AS(
       SELECT  
@@ -575,7 +696,15 @@ exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, ca
       
     )
     SELECT 
-*,
+    *,
+    (
+            CASE WHEN carparking_time_interval_value <= (SELECT input_case_free_over_time FROM input_data) THEN
+            true
+            ELSE
+            false
+            END
+    )
+    AS is_less_time_than_free_parking,
   to_char(
 	CASE WHEN 
 	(carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
@@ -633,7 +762,8 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
       $2::timestamp  AS input_time_from,
       0::integer AS input_employee_id,
       0::integer AS input_company_id,
-      $3::integer AS input_division_id
+      $3::integer AS input_division_id,
+      '30 mins'::interval AS input_case_free_over_time
     ),
     result_data AS(
       SELECT  
@@ -679,6 +809,14 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
     )
     SELECT 
     *,
+    (
+            CASE WHEN carparking_time_interval_value <= (SELECT input_case_free_over_time FROM input_data) THEN
+            true
+            ELSE
+            false
+            END
+    )
+    AS is_less_time_than_free_parking,
     to_char(
             CASE WHEN 
             (carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
@@ -728,7 +866,7 @@ exports.db_action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle 
 
   let report_start = obj.m_report_start
   let report_end = obj.m_report_end
-  let card_status =  obj.m_card_status
+  let card_status = obj.m_card_status
 
 
 
@@ -781,7 +919,7 @@ exports.db_action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle 
     payment_time BETWEEN $1::timestamp AND $2::timestamp
     ORDER BY payment_type_id,payment_time,receipt_running_number
   `,
-    values: [report_start, report_end,card_status],
+    values: [report_start, report_end, card_status],
   }
 
   pool.connect().then(client => {
@@ -813,7 +951,7 @@ exports.db_action_vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycl
   let report_start = obj.m_report_start
   let report_end = obj.m_report_end
   let cabinet_payment_id = obj.m_cabinet_payment_id
-  let card_status =  obj.m_card_status
+  let card_status = obj.m_card_status
 
 
 
@@ -864,7 +1002,7 @@ exports.db_action_vt_parking_payment_visitor_info_by_id_cabinet_car_or_motorcycl
       payment_time BETWEEN $1::timestamp AND $2::timestamp
       ORDER BY payment_type_id,payment_time,receipt_running_number
     `,
-    values: [report_start, report_end, cabinet_payment_id,card_status],
+    values: [report_start, report_end, cabinet_payment_id, card_status],
   }
 
   pool.connect().then(client => {
@@ -897,7 +1035,7 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle =
 
   let report_start = obj.m_report_start
   let report_end = obj.m_report_end
-  let card_status =  obj.m_card_status
+  let card_status = obj.m_card_status
 
 
   const query = {
@@ -943,7 +1081,7 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt_car_or_motorcycle =
     ORDER BY 
     cabinet_payment_id,card_type_id,payment_type_id,payment_event_id
   `,
-    values: [report_start, report_end,card_status],
+    values: [report_start, report_end, card_status],
   }
 
   pool.connect().then(client => {

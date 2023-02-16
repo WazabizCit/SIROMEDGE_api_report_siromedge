@@ -8,6 +8,7 @@ const {
     db_action_vt_parking_estamp_visitor_history_date,
     db_action_vt_parking_estamp_visitor_history_employee,
     db_action_vt_parking_estamp_visitor_history_division,
+    db_action_vt_parking_estamp_visitor_history_company,
     db_action_vt_parking_payment_visitor_min_max_receipt,
     db_action_vt_parking_visitor_card_lost_and_damaged_history,
     db_action_vt_parking_payment_visitor_info_all_cabinet_car_or_motorcycle,
@@ -242,6 +243,24 @@ exports.action_vt_parking_estamp_visitor_history_division = (req, res) => {
     });
 
 }
+
+
+exports.action_vt_parking_estamp_visitor_history_company = (req, res) => {
+
+    db_action_vt_parking_estamp_visitor_history_company(req.body, (err, data) => {
+        if (data === null) {
+            let data_res_default = format.create('200', true, "db_action_vt_parking_estamp_visitor_history_company_fail", null)
+            res.send(data_res_default);
+            util_fun.show_log_res_fatal(req,data_res_default)
+        } else {
+            let data_res = format.create('200', false, null, { "header_data": req.body, "sub_data": data })
+            res.send(data_res);
+            util_fun.show_log_res_info(req,data_res)
+        }
+    });
+
+}
+
 
 
 
