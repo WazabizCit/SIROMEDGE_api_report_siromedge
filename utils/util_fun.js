@@ -6,7 +6,7 @@ let config = require("../config/env");
 log4js.configure({
     appenders: {
         appender: {
-            backups:100,
+            backups:500,
             type: 'file',
             filename: `../logs/${config.main_config.APP_NAME}/log`,
             keepFileExt: true,

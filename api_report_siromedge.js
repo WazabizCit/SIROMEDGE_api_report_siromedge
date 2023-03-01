@@ -22,6 +22,7 @@ app.listen(config.main_config.PORT, () => {
 const actionreports_visitor = require('./routes/action_reports_visitor_route');
 const actionreports_member = require('./routes/action_reports_member_route');
 const actionreports_analyst = require('./routes/action_reports_analyst_route');
+const actionreports_cabinet = require('./routes/action_reports_cabinet_route');
 const actionutil = require('./routes/action_util_route');
 
 
@@ -35,6 +36,7 @@ const actionutil = require('./routes/action_util_route');
 app.use('/apipos/actionreports/visitor', actionreports_visitor);
 app.use('/apipos/actionreports/member', actionreports_member);
 app.use('/apipos/actionreports/analyst', actionreports_analyst);
+app.use('/apipos/actionreports/cabinet', actionreports_cabinet);
 app.use('/apipos/actionutil', actionutil);
 
 
