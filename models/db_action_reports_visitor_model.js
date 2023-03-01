@@ -487,7 +487,7 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
     to_char(
       CASE WHEN 
       (carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
-      carparking_time_interval_value - estamp_info_interval 
+      fun_parking_interval_difference(carparking_time_interval_value,estamp_info_interval) 
       ELSE
       '00:00:00'::interval
       END
@@ -597,7 +597,7 @@ exports.db_action_vt_parking_estamp_visitor_history_company = function (obj, cal
   to_char(
 	CASE WHEN 
 	(carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
-	carparking_time_interval_value - estamp_info_interval 
+  fun_parking_interval_difference(carparking_time_interval_value,estamp_info_interval)  
 	ELSE
 	'00:00:00'::interval
 	END
@@ -708,7 +708,7 @@ exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, ca
   to_char(
 	CASE WHEN 
 	(carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
-	carparking_time_interval_value - estamp_info_interval 
+  fun_parking_interval_difference(carparking_time_interval_value,estamp_info_interval) 
 	ELSE
 	'00:00:00'::interval
 	END
@@ -820,7 +820,7 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
     to_char(
             CASE WHEN 
             (carparking_time_interval_value - estamp_info_interval) > '00:00:00'::interval THEN 
-            carparking_time_interval_value - estamp_info_interval 
+            fun_parking_interval_difference(carparking_time_interval_value,estamp_info_interval) 
             ELSE
             '00:00:00'::interval
             END
