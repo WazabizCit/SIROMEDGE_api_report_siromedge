@@ -87,7 +87,7 @@ exports.db_action_vt_parking_payment_visitor_min_max_receipt = function (obj, ca
     FROM 
     vt_parking_payment_visitor_info 
     WHERE 
-    payment_time::DATE BETWEEN $1::timestamp AND $2::timestamp
+    payment_time::DATE BETWEEN $1::timestamp AND $2::timestamp 
     GROUP BY 
     cabinet_payment_id,
     cabinet_payment_code,
