@@ -492,7 +492,10 @@ exports.db_action_vt_parking_estamp_visitor_history_date = function (obj, callba
       ELSE
       '00:00:00'::interval
       END
-    ,'HH24:MI:SS') AS over_estamp_value
+    ,'HH24:MI:SS') AS over_estamp_value,
+    EXTRACT( DAY FROM carparking_time_interval_value) AS parking_interval_day_text,
+    EXTRACT( HOUR FROM carparking_time_interval_value) AS parking_interval_hour_text,
+    EXTRACT( MINUTE FROM carparking_time_interval_value) AS parking_interval_minute_text
     FROM result_data 
     ORDER BY 
     carparking_in_time,
@@ -603,7 +606,10 @@ exports.db_action_vt_parking_estamp_visitor_history_company = function (obj, cal
 	ELSE
 	'00:00:00'::interval
 	END
-  ,'HH24:MI:SS') AS over_estamp_value
+  ,'HH24:MI:SS') AS over_estamp_value,
+    EXTRACT( DAY FROM carparking_time_interval_value) AS parking_interval_day_text,
+    EXTRACT( HOUR FROM carparking_time_interval_value) AS parking_interval_hour_text,
+    EXTRACT( MINUTE FROM carparking_time_interval_value) AS parking_interval_minute_text
   FROM result_data 
   WHERE
   company_id::integer = (SELECT input_company_id FROM input_data)
@@ -715,7 +721,10 @@ exports.db_action_vt_parking_estamp_visitor_history_employee = function (obj, ca
 	ELSE
 	'00:00:00'::interval
 	END
-  ,'HH24:MI:SS') AS over_estamp_value
+  ,'HH24:MI:SS') AS over_estamp_value,
+  EXTRACT( DAY FROM carparking_time_interval_value) AS parking_interval_day_text,
+  EXTRACT( HOUR FROM carparking_time_interval_value) AS parking_interval_hour_text,
+  EXTRACT( MINUTE FROM carparking_time_interval_value) AS parking_interval_minute_text
   FROM result_data 
   WHERE
   estamp_info_by = (SELECT input_employee_id FROM input_data)
@@ -828,7 +837,10 @@ exports.db_action_vt_parking_estamp_visitor_history_division = function (obj, ca
             ELSE
             '00:00:00'::interval
             END
-    ,'HH24:MI:SS') AS over_estamp_value
+    ,'HH24:MI:SS') AS over_estamp_value,
+    EXTRACT( DAY FROM carparking_time_interval_value) AS parking_interval_day_text,
+    EXTRACT( HOUR FROM carparking_time_interval_value) AS parking_interval_hour_text,
+    EXTRACT( MINUTE FROM carparking_time_interval_value) AS parking_interval_minute_text
     FROM result_data 
     WHERE
     division_id::integer = (SELECT input_division_id FROM input_data)
