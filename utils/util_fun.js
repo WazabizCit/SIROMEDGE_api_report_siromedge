@@ -10,7 +10,7 @@ log4js.configure({
             type: 'file',
             filename: `../logs/${config.main_config.APP_NAME}/log`,
             keepFileExt: true,
-            compress: true,
+            compress: false,
             pattern: 'yyyy-MM-dd.log',
             alwaysIncludePattern: true,
         },

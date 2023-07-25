@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.listen(config.main_config.PORT, () => {
-    console.log(ip.address() + " Ver.1.0.2 (02/03/2023) =>" + 'Start server at port ' + config.main_config.PORT)
+    console.log(ip.address() + " Ver.1.0.4 (10/07/2023) =>" + 'Start server at port ' + config.main_config.PORT)
 })
 
 

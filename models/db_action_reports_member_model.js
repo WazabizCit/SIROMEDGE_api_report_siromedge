@@ -197,3 +197,55 @@ order by carparking_in_time
   })
 
 }
+
+
+
+
+
+
+exports.db_action_get_allmember = function (obj, callback) {
+
+
+  
+
+  const query = {
+
+    text: `SELECT 
+    employee_api_type  AS "employee_api_type",
+    employee_api_code AS "employee_api_code",
+    employee_id AS "employeeID",
+    employee_name AS "employeeName",
+    company_name AS "companyName",
+    department_name AS "departmentName",
+    to_char(start_work_date,'YYYY-MM-DD HH24:MI:SS') AS "startWorkDate",
+    to_char(end_work_date,'YYYY-MM-DD HH24:MI:SS') AS "endWorkDate",
+    (NOT(CURRENT_TIMESTAMP BETWEEN  start_work_date AND end_work_date))::text AS "isWorkDateExpire",
+    card_no AS "cardNo",
+    qr_code AS "qrCode",
+    license_plate AS "licensePlate",
+    to_char(create_date,'YYYY-MM-DD HH24:MI:SS') AS "addTimestamp",
+    to_char(update_date,'YYYY-MM-DD HH24:MI:SS') AS "editTimestamp",
+    (CASE WHEN employee_api_status IS null  THEN 'false' ELSE 'true' END) AS "isParking"
+    FROM m_employee_api 
+    WHERE   delete_flag = 'N'
+    ORDER BY employee_api_id ASC`,
+    values: [],
+
+}
+
+pool.connect().then(client => {
+    return client.query(query)
+        .then(result => {
+            client.release(true)
+            return callback(null, result.rows);
+        })
+        .catch(err => {
+            console.log(err)
+            client.release(true)
+            return callback(null, null);
+        })
+})
+
+
+
+}
